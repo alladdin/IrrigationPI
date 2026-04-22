@@ -1,0 +1,33 @@
+{
+  "name": "irrigation_pi",
+  "version": "1.0.0",
+  "main": "./src/server.ts",
+  "author": "Ladislav Dokulil <alladdin@zemres.cz>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node ./dist/server.js",
+    "dev": "nodemon --watch ./src/**/*.ts --exec npx tsx ./src/server.ts",
+    "lint": "npx eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.5.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
+}
