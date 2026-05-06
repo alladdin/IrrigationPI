@@ -1,5 +1,5 @@
 import express from 'express';
-import itemRoutes from './routes/itemRoutes.ts';
+import relayRoutes from './routes/relayRoutes.ts';
 import { errorHandler } from './middlewares/errorHandler.ts';
 
 const app = express();
@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use('/api/items', itemRoutes);
+app.use('/api/relay', relayRoutes);
 
 // Global error handler (should be after routes)
 app.use(errorHandler);
