@@ -9,8 +9,13 @@ class Relays {
 
   constructor() {
     this.relayPins.forEach((pin, index) => {
-      this.gpios[index] = new Gpio(pin, 'out');
-      this.gpios[index].writeSync(1);
+      try {
+        this.gpios[index] = new Gpio(pin, 'out');
+        this.gpios[index].writeSync(1);
+      } catch (e) {
+        console.error(`Failed to initialize relay ${index}:`, e);
+        this.relayErrors[index] = true;
+      }
     });
   }
 
@@ -25,7 +30,12 @@ class Relays {
 
     if (!this.relayErrors[index] && this.gpios[index]){
       const val = this.relays[index] ? 0 : 1;
-      this.gpios[index].writeSync(val);
+      try {
+        this.gpios[index].writeSync(val);
+      } catch (e) {
+        console.error(`Failed to write relay ${index}:`, e);
+        this.relayErrors[index] = true;
+      }
     }
   }
 
