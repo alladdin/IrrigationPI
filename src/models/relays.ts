@@ -1,12 +1,17 @@
 import {Relay} from "./relay.ts";
+import config from "config";
 
 class Relays {
   private relays: Relay[] = [];
-  private relayPins = [530, 535, 536, 537, 520, 519, 529, 534];
 
   constructor() {
-    this.relayPins.forEach((pin) => {
-      this.relays.push(new Relay(pin));
+    const configRelays = config.get('relays');
+
+    //@ts-ignore
+    Object.keys(configRelays).forEach((key) => {
+      //@ts-ignore
+      const {pin, relay} = configRelays[key];
+      this.relays[relay] = new Relay(pin, key, relay);
     });
   }
 

@@ -1,10 +1,14 @@
 import app from './app.ts';
-import config from './config/config.ts';
+import config from 'config';
 import {destroyRegistry} from "./utils/destroyRegistry.ts";
 import exitHook from 'exit-hook';
 
-const server = app.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`);
+const serverConfig = config.get('server');
+//@ts-ignore
+const port = serverConfig.port;
+
+const server = app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
 
 exitHook(() => {

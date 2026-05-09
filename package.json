@@ -8,11 +8,10 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node ./dist/server.js",
-    "dev": "nodemon --watch ./src/**/*.ts --exec npx tsx ./src/server.ts",
+    "dev": "nodemon --watch ./src/**/*.ts --watch ./config/**/*.ts --exec npx tsx ./src/server.ts",
     "lint": "npx eslint src/**/*.ts"
   },
   "dependencies": {
-    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "onoff": "^6.0.3"
   },
@@ -24,6 +23,7 @@
     "@types/rpi-gpio": "^2.1.4",
     "@typescript-eslint/eslint-plugin": "^8.59.0",
     "@typescript-eslint/parser": "^8.59.0",
+    "config": "^4.4.1",
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "exit-hook": "^5.1.0",

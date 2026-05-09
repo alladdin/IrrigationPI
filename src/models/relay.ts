@@ -5,22 +5,27 @@ type stateCallbackType = Record<string, (state: boolean) => void>;
 
 export class Relay extends Destructible {
   private readonly pin: number;
+  private readonly name: string;
+  private readonly index: number;
   private gpio: Gpio | null = null;
   private state: boolean = false;
   private stateChangeCallbacks: stateCallbackType = {};
 
-  constructor(pin: number) {
+  constructor(pin: number, name: string, index: number) {
     super();
     this.pin = pin;
+    this.name = name;
+    this.index = index;
+
     try {
       this.gpio = new Gpio(pin, 'out');
       this.gpio.writeSync(1);
     } catch (e) {
-      console.error(`Failed to initialize relay ${pin}:`, e);
+      console.error(`Failed to initialize relay ${this.name}:`, e);
       this.gpio = null;
     }
     this.state = false;
-    console.log(`Set relay ${pin} to 'off'`);
+    console.log(`Set relay ${this.name} to 'off'`);
   }
 
   getState(): boolean {
@@ -28,14 +33,14 @@ export class Relay extends Destructible {
   }
 
   setState(state: boolean) {
-    console.log(`Set relay ${this.pin} to '${state ? 'on' : 'off'}'`);
+    console.log(`Set relay ${this.name} to '${state ? 'on' : 'off'}'`);
     this.state = state;
     if (this.gpio) {
       const val = state ? 0 : 1;
       try {
         this.gpio.writeSync(val);
       } catch (e) {
-        console.error(`Failed to write relay ${this.pin}:`, e);
+        console.error(`Failed to write relay ${this.name}:`, e);
         this.gpio = null;
       }
     }
