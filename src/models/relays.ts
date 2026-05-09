@@ -1,14 +1,16 @@
 import {Gpio} from "onoff";
+import {Destructible} from "../utils/destroyRegistry.ts";
 
-class Relays {
+class Relays extends Destructible {
   private relays = [false, false, false, false, false, false, false, false];
-//  private relayPins = [18, 23, 24, 25, 8, 7, 17, 22];
   private relayPins = [530, 535, 536, 537, 520, 519, 529, 534];
   private relayErrors = [false, false, false, false, false, false, false, false];
   private gpios: Gpio[] = [];
 
   constructor() {
+    super();
     this.relayPins.forEach((pin, index) => {
+      console.log(`Set relay ${index} to 'off'`);
       try {
         this.gpios[index] = new Gpio(pin, 'out');
         this.gpios[index].writeSync(1);
@@ -28,6 +30,7 @@ class Relays {
 
     this.relays[index] = state;
 
+    console.log(`Set relay ${index} to '${state ? 'on' : 'off'}'`);
     if (!this.relayErrors[index] && this.gpios[index]){
       const val = this.relays[index] ? 0 : 1;
       try {
@@ -44,14 +47,12 @@ class Relays {
   }
 
   public destroy() {
-    this.gpios.forEach((gpio) => {
+    console.log('Relays module is being destroyed');
+    this.gpios.forEach((gpio, index) => {
+      console.log(`Unexporting relay ${index}`);
       gpio.unexport();
     });
   }
 }
 
 export const relays = new Relays();
-
-process.on('SIGINT', _ => {
-    relays.destroy();
-});
