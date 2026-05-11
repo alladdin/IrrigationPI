@@ -4,7 +4,7 @@ import {destroyRegistry} from "./utils/destroyRegistry.ts";
 import exitHook from 'exit-hook';
 
 const serverConfig = config.get('server');
-//@ts-ignore
+//@ts-expect-error
 const port = serverConfig.port;
 
 const server = app.listen(port, () => {
