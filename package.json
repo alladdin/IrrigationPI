@@ -16,6 +16,7 @@
     "config": "^4.4.1",
     "exit-hook": "^5.1.0",
     "express": "^5.2.1",
+    "express-handlebars": "^9.0.1",
     "onoff": "^6.0.3"
   },
   "devDependencies": {
