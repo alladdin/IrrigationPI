@@ -6,30 +6,35 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "npx tsc",
+    "build": "yarn tsc",
     "start": "node ./dist/src/server.js",
-    "dev": "nodemon --watch ./src/**/*.ts --watch ./config/**/*.ts --exec npx tsx ./src/server.ts",
-    "lint": "npx eslint src/**/*.ts"
+    "dev": "nodemon --watch ./src/**/*.ts --watch ./config/**/*.json --exec yarn tsx ./src/server.ts",
+    "lint": "yarn tsc --noEmit && yarn eslint src/**/*.ts",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "dependencies": {
+    "config": "^4.4.1",
+    "exit-hook": "^5.1.0",
     "express": "^5.2.1",
     "onoff": "^6.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
+    "@jest/globals": "^30.4.1",
     "@types/express": "^5.0.6",
-    "@types/node": "^25.6.0",
-    "@types/rpi-gpio": "^2.1.4",
-    "@typescript-eslint/eslint-plugin": "^8.59.0",
-    "@typescript-eslint/parser": "^8.59.0",
-    "config": "^4.4.1",
-    "eslint": "^10.2.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
-    "exit-hook": "^5.1.0",
-    "globals": "^17.5.0",
+    "globals": "^17.6.0",
+    "jest": "^30.4.2",
+    "json5": "^2.2.3",
     "nodemon": "^3.1.14",
     "prettier": "^3.8.3",
+    "ts-jest": "^29.4.9",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   }

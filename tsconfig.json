@@ -5,7 +5,7 @@
     "rootDir": "./",
     "outDir": "./dist",
     "paths": {
-      "src/*": ["./src/*"],
+      "src/*": ["./src/*"]
     },
 
     // Environment Settings
@@ -46,7 +46,11 @@
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
     "esModuleInterop": true,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["node_modules", "dist"]
 }

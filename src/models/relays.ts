@@ -7,9 +7,9 @@ class Relays {
   constructor() {
     const configRelays = config.get('relays');
 
-    //@ts-expect-error
+    //@ts-expect-error: configRelays is expected to be an object with keys and values
     Object.keys(configRelays).forEach((key) => {
-      //@ts-expect-error
+      //@ts-expect-error: relay config object should have pin and relay properties
       const {pin, relay} = configRelays[key];
       this.relays[relay] = new Relay(pin, key, relay);
     });
