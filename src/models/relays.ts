@@ -1,17 +1,17 @@
 import {Relay} from "./relay.ts";
 import config from "config";
+import type {RelaysConfig} from "../config/relayConfig.ts";
 
 class Relays {
   private relays: Relay[] = [];
 
   constructor() {
-    const configRelays = config.get('relays');
+    const configRelays: RelaysConfig = config.get('relays');
 
-    //@ts-expect-error: configRelays is expected to be an object with keys and values
     Object.keys(configRelays).forEach((key) => {
-      //@ts-expect-error: relay config object should have pin and relay properties
-      const {pin, relay} = configRelays[key];
-      this.relays[relay] = new Relay(pin, key, relay);
+      const configRelay = configRelays[key];
+      if (configRelay === undefined) return;
+      this.relays[configRelay.relay] = new Relay(configRelay.pin, key, configRelay.relay);
     });
   }
 

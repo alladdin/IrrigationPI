@@ -2,9 +2,9 @@ import app from './app.ts';
 import config from 'config';
 import {destroyRegistry} from "./utils/destroyRegistry.ts";
 import exitHook from 'exit-hook';
+import type {ServerConfig} from "./config/severConfig.ts";
 
-const serverConfig = config.get('server');
-//@ts-expect-error: serverConfig has no signature
+const serverConfig: ServerConfig = config.get('server');
 const port = serverConfig.port;
 
 const server = app.listen(port, () => {
